@@ -14,7 +14,7 @@
                 <Button x:Name="exit_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand">
                     <Image Source="/Resources/exiit.png" Width="32" Height="30" Stretch="Fill"/>
                 </Button>
-                <Button x:Name="view_route_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="170,0,0,0">
+                <Button x:Name="view_route_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="170,0,0,0" Click="view_route_btn_Click">
                     <Image Source="/Resources/view.png" Width="32" Height="32"/>
                 </Button>
                 <Button x:Name="delete_route_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="250,0,0,0">

@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace CarPark
 {
     /// <summary>
-    /// Логика взаимодействия для Registration.xaml
+    /// Логика взаимодействия для RouteInfoPage.xaml
     /// </summary>
-    public partial class Registration : Window
+    public partial class RouteInfoPage : Window
     {
-        public Registration()
+        public RouteInfoPage()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

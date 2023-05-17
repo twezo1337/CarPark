@@ -82,5 +82,11 @@ namespace CarPark
             lk LK = new lk();
             LK.Show();
         }
+
+        private void view_route_btn_Click(object sender, RoutedEventArgs e)
+        {
+            RouteInfoPage routeInfo = new RouteInfoPage();
+            routeInfo.Show();
+        }
     }
 }

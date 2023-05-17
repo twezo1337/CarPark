@@ -22,8 +22,8 @@
             <TextBox x:Name="tbPassword" Text="Пароль" BorderThickness="0,0,0,0" Foreground="#6A6A6A" FontSize="14" FontWeight="Light" Padding="14,0,0,0" CaretBrush="#00F9F9F9" SelectionBrush="#00B39DDB" RenderTransformOrigin="0.5,0.5"/>
         </Border>
         <Grid Width="278" VerticalAlignment="Top" Margin="0,232,0,0">
-            <Button HorizontalAlignment="Left" Width="117" Height="38" Background="#2F3D1E" BorderBrush="#FF2F3D1E" Click="Button_Click">Регистрация</Button>
-            <Button HorizontalAlignment="Right" Width="117" Height="38" Background="#2F3D1E" BorderBrush="#FF2F3D1E" Click="Button_Click_1">Войти</Button>
+            <Button HorizontalAlignment="Left" Width="117" Height="38" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E" Click="Button_Click">Регистрация</Button>
+            <Button HorizontalAlignment="Right" Width="117" Height="38" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E" Click="Button_Click_1">Войти</Button>
         </Grid>
     </Grid>
 </Window>
