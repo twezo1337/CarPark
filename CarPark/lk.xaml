@@ -61,7 +61,7 @@
             </Grid>
             <Grid Width="180" HorizontalAlignment="Right" Margin="0,0,0,0">
                 <Image x:Name="profile_img" Source="/Resources/profile1.png" VerticalAlignment="Top" Height="130" Stretch="Fill" Margin="25,0,25,0"/>
-                <Button VerticalAlignment="Bottom" Height="25" Width="130" Background="#2F3D1E" BorderBrush="#FF2F3D1E" FontSize="12">Загрузить фото</Button>
+                <Button VerticalAlignment="Bottom" Height="25" Width="130" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E" FontSize="12">Загрузить фото</Button>
             </Grid>
         </Grid>
     </Grid>

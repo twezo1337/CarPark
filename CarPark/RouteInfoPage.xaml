@@ -1,0 +1,113 @@
+﻿<Window x:Class="CarPark.RouteInfoPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarPark"
+        mc:Ignorable="d"
+        Title="RouteInfoPage" Height="485" Width="750" ResizeMode="NoResize" FontFamily="Inter">
+    <Grid>
+        <Grid Width="650" VerticalAlignment="Top" Margin="0,18,0,0">
+            <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand">
+                <Image Source="/Resources/back.png" Width="32" Height="30" Stretch="Fill"/>
+            </Button>
+            <Button x:Name="edit_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="80,0,0,0">
+                <Image Source="/Resources/edit.png" Width="32" Height="32"/>
+            </Button>
+
+            <Label Margin="500,10,0,0" Content="UserName" FontSize="14px" FontFamily="Inter" FontWeight="Regular"></Label>
+            <Button x:Name="lk_btn" HorizontalAlignment="Right" Width="65" Height="43" Background="Transparent" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="0,0,0,0">
+                <Image Source="/Resources/user.png" Width="32" Height="32"/>
+            </Button>
+
+        </Grid>
+        <Grid Width="650" VerticalAlignment="Top" Margin="0,80,0,0">
+            <TabControl x:Name="routeFullInfo" Width="650">
+                <TabItem x:Name="driverInfo" Width="215" Height="45" HorizontalAlignment="Left">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontWeight="Medium" FontSize="12" Foreground="#2F3D1E">Информация о водителе</TextBlock>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel Margin="0,20,0,0">
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Имя" Height="25"/>
+                                <TextBox IsReadOnly="True" x:Name="tb_driverName" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="Владислав" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Фамилия" Height="25"/>
+                                <TextBox x:Name="tb_driverSurname" FontSize="16" FontWeight="Medium" Text="Захаров" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Отчество" Height="25"/>
+                                <TextBox x:Name="tb_driverLastName" FontSize="16" FontWeight="Medium" Text="Владимирович" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                            </Grid>
+                            <Button Width="150" Height="50" HorizontalAlignment="Right" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E">Сохранить</Button>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem x:Name="carInfo" Width="215" Height="45" HorizontalAlignment="Center">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontWeight="Medium" FontSize="12" Foreground="#2F3D1E">Информация об автомобиле</TextBlock>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel Margin="0,20,0,0">
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Гос. номер" Height="25"/>
+                                <TextBox IsReadOnly="True" x:Name="tb_gosNumber" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="с067хм" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Марка" Height="25"/>
+                                <ComboBox x:Name="cmb_mark" FontSize="16" FontWeight="Medium" IsEditable="true" Text="" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Тип транспорта" Height="25"/>
+                                <ComboBox x:Name="cmb_kindTransport" FontSize="16" FontWeight="Medium" IsEditable="true" Text="" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                            </Grid>
+                            <Button Width="150" Height="50" HorizontalAlignment="Right" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E">Сохранить</Button>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem x:Name="routeInfo" Width="215" Height="45" HorizontalAlignment="Right">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontWeight="Medium" FontSize="12" Foreground="#2F3D1E">Информация о рейсе</TextBlock>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel Margin="0,20,0,0">
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Название маршрута" Height="25"/>
+                                <TextBox IsReadOnly="True" x:Name="tb_routeName" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="Красноярск-Канск" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Длина маршрута" Height="25"/>
+                                <TextBox IsReadOnly="True" x:Name="tb_routeLength" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="300" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Дата распределения" Height="25"/>
+                                <DatePicker x:Name="tb_rasprDate" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="300" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Водитель" Height="25"/>
+                                <ComboBox x:Name="tb_kindTransport" FontSize="16" FontWeight="Medium" IsEditable="true" Text="" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Дата маршрута" Height="25"/>
+                                <DatePicker x:Name="tb_routeDate" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="300" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                            </Grid>
+                            <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Кол-во пассажиров" Height="25"/>
+                                <TextBox IsReadOnly="True" x:Name="tb_pasCount" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="12" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                            </Grid>
+                            <Button Width="150" Height="50" HorizontalAlignment="Right" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E">Сохранить</Button>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>
