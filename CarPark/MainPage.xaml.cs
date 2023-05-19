@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections;
 
 namespace CarPark
 {
@@ -18,27 +19,28 @@ namespace CarPark
     /// Логика взаимодействия для MainPage.xaml
     /// </summary>
     /// 
+
     class MyTable
     {
         public MyTable(string gosNumber, string mark, string kindOfTransport, string date, string routeName, string length, string routeDate, string pasCount)
         {
-            this.gosNumber = gosNumber;
-            this.mark = mark;
-            this.kindOfTransport = kindOfTransport;
-            this.date = date;
-            this.routeName = routeName;
-            this.length = length;
-            this.routeDate = routeDate;
-            this.pasCount = pasCount;
+            this.GosNumber = gosNumber;
+            this.Mark = mark;
+            this.KindOfTransport = kindOfTransport;
+            this.Date = date;
+            this.RouteName = routeName;
+            this.Length = length;
+            this.RouteDate = routeDate;
+            this.PasCount = pasCount;
         }
-        public string gosNumber { get; set; }
-        public string mark { get; set; }
-        public string kindOfTransport { get; set; }
-        public string date { get; set; }
-        public string routeName { get; set; }
-        public string length { get; set; }
-        public string routeDate { get; set; }
-        public string pasCount { get; set; }
+        public string GosNumber { get; set; }
+        public string Mark { get; set; }
+        public string KindOfTransport { get; set; }
+        public string Date { get; set; }
+        public string RouteName { get; set; }
+        public string Length { get; set; }
+        public string RouteDate { get; set; }
+        public string PasCount { get; set; }
     }
     public partial class MainPage : Window
     {
@@ -54,15 +56,17 @@ namespace CarPark
 
         private void mainDataTable_Loaded(object sender, RoutedEventArgs e)
         {
-            List<MyTable> result = new List<MyTable>(7);
-            result.Add(new MyTable("с068хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "12"));
-            result.Add(new MyTable("с069хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "14"));
-            result.Add(new MyTable("с067хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "11"));
-            result.Add(new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"));
-            result.Add(new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"));
-            result.Add(new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"));
-            result.Add(new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"));
-            result.Add(new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"));
+            List<MyTable> result = new(7)
+            {
+                new MyTable("с068хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "12"),
+                new MyTable("с069хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "14"),
+                new MyTable("с067хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "11"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13")
+            };
             mainDataTable.ItemsSource = result;
         }
 
@@ -73,13 +77,13 @@ namespace CarPark
 
         private void users_table_btn_Click(object sender, RoutedEventArgs e)
         {
-            Users users = new Users();
+            Users users = new();
             users.Show();
         }
 
         private void lk_btn_Click(object sender, RoutedEventArgs e)
         {
-            lk LK = new lk();
+            lk LK = new();
             LK.Show();
         }
     }

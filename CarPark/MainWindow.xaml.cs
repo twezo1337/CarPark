@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+/*using System.Data.Odbc; // NEED TO BE INSTALLED*/
+using MySql.Data.MySqlClient; // NEED TO BE INSTALLED
 
 namespace CarPark
 {
@@ -22,6 +26,32 @@ namespace CarPark
     {
         public MainWindow()
         {
+            string host = "localhost";
+            string database = "zi";
+            string port = "3306";
+            string username = "root";
+            string password = "zi23";
+            string connString = "Server=" + host + ";Database=" + database + ";port=" + port + ";User Id=" + username + ";password=" + password;
+
+            MySqlConnection conn = new(connString);
+            
+            conn.Open();
+
+            /*string connectionString = "FILEDSN=C:\\Users\\whoami\\source\\repos\\CarPark\\CarPark\\App_Data\\zi_connection.dsn";
+            string query = "INSERT INTO log_in (login, password) VALUES ('admin', 'admin');";
+
+            using (OdbcConnection connection = new(connectionString))
+            {
+                connection.Open();
+
+                using (OdbcCommand command = new(query, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                connection.Close();
+            }
+*/
             InitializeComponent();
         }
 
