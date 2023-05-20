@@ -24,23 +24,23 @@ namespace CarPark
     {
         public MyTable(string gosNumber, string mark, string kindOfTransport, string date, string routeName, string length, string routeDate, string pasCount)
         {
-            this.GosNumber = gosNumber;
-            this.Mark = mark;
-            this.KindOfTransport = kindOfTransport;
-            this.Date = date;
-            this.RouteName = routeName;
-            this.Length = length;
-            this.RouteDate = routeDate;
-            this.PasCount = pasCount;
+            this.gosNumber = gosNumber;
+            this.mark = mark;
+            this.kindOfTransport = kindOfTransport;
+            this.date = date;
+            this.routeName = routeName;
+            this.length = length;
+            this.routeDate = routeDate;
+            this.pasCount = pasCount;
         }
-        public string GosNumber { get; set; }
-        public string Mark { get; set; }
-        public string KindOfTransport { get; set; }
-        public string Date { get; set; }
-        public string RouteName { get; set; }
-        public string Length { get; set; }
-        public string RouteDate { get; set; }
-        public string PasCount { get; set; }
+        public string gosNumber { get; set; }
+        public string mark { get; set; }
+        public string kindOfTransport { get; set; }
+        public string date { get; set; }
+        public string routeName { get; set; }
+        public string length { get; set; }
+        public string routeDate { get; set; }
+        public string pasCount { get; set; }
     }
     public partial class MainPage : Window
     {
@@ -56,8 +56,16 @@ namespace CarPark
 
         private void mainDataTable_Loaded(object sender, RoutedEventArgs e)
         {
-            List<MyTable> result = new(7)
+            List<MyTable> result = new(14)
             {
+                new MyTable("с068хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "12"),
+                new MyTable("с069хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "14"),
+                new MyTable("с067хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "11"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
+                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
                 new MyTable("с068хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "12"),
                 new MyTable("с069хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "14"),
                 new MyTable("с067хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "11"),

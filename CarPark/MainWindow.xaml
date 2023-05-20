@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CarPark"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Авторизация CarPark" Height="440" Width="450" Cursor="" ResizeMode="NoResize" FontFamily="Exo 2">
+        Title="Авторизация CarPark" Height="440" Width="450" Cursor="" ResizeMode="NoResize" FontFamily="Exo 2" Unloaded="Window_Unloaded" Loaded="Window_Loaded">
     <Grid>
         <Grid>
             <TextBlock HorizontalAlignment="Center" FontSize="16" FontWeight="Medium" FontStretch="Normal" Foreground="#2F3D1E" Margin="0,7,0,0">Автопарк</TextBlock>

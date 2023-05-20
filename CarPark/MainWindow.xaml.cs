@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 /*using System.Data.Odbc; // NEED TO BE INSTALLED*/
-using MySql.Data.MySqlClient; // NEED TO BE INSTALLED
+using MySql.Data.MySqlClient;
 
 namespace CarPark
 {
@@ -24,18 +24,18 @@ namespace CarPark
     /// </summary>
     public partial class MainWindow : Window
     {
+        string host = "localhost";
+        string database = "zi";
+        string port = "3306";
+        string username = "root";
+        string password = "qwerty";
+       
         public MainWindow()
         {
-            string host = "localhost";
-            string database = "zi";
-            string port = "3306";
-            string username = "root";
-            string password = "zi23";
-            string connString = "Server=" + host + ";Database=" + database + ";port=" + port + ";User Id=" + username + ";password=" + password;
-
-            MySqlConnection conn = new(connString);
             
-            conn.Open();
+           
+
+            
 
             /*string connectionString = "FILEDSN=C:\\Users\\whoami\\source\\repos\\CarPark\\CarPark\\App_Data\\zi_connection.dsn";
             string query = "INSERT INTO log_in (login, password) VALUES ('admin', 'admin');";
@@ -55,6 +55,17 @@ namespace CarPark
             InitializeComponent();
         }
 
+        private MySqlConnection connectMySQL()
+        {
+            String connString = "Server=" + host + ";Database=" + database
+               + ";port=" + port + ";User Id=" + username + ";password=" + password;
+
+            MySqlConnection conn = new MySqlConnection(connString);
+
+            return conn;
+        }
+
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -70,6 +81,37 @@ namespace CarPark
         {
             MainPage main = new MainPage();
             main.Show();
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            /*MySqlConnection conn = connectMySQL();
+
+            conn.Open();
+
+            string query = "SELECT marks.mark FROM marks";
+
+
+
+                using (MySqlCommand command = new(query, conn))
+                {
+                    command.ExecuteNonQuery();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                        tbLogin.AppendText(reader.GetString(0));
+                        tbPassword.AppendText(reader.GetString(0));
+                        }
+
+                    }
+                }*/
+
         }
     }
 }
