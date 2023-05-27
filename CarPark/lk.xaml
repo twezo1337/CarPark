@@ -5,16 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarPark"
         mc:Ignorable="d"
-        Title="lk" Height="330" Width="500" ResizeMode="NoResize" FontFamily="Inter">
+        Title="lk" Height="330" Width="500" ResizeMode="NoResize" FontFamily="Inter" Loaded="Window_Loaded">
     <Grid>
-        <Grid Width="400" VerticalAlignment="Top" Margin="0,18,0,0">
-            <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="52*"/>
+            <ColumnDefinition Width="73*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Width="400" VerticalAlignment="Top" Margin="50,18,50,0" Grid.ColumnSpan="2">
+            <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand" Click="back_btn_Click">
                 <Image Source="/Resources/back.png" Width="32" Height="30" Stretch="Fill"/>
             </Button>
-            <Button x:Name="exit_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="80,0,0,0">
+            <Button x:Name="exit_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="80,0,0,0" Click="exit_btn_Click">
                 <Image Source="/Resources/exiit.png" Width="32" Height="32"/>
             </Button>
-            <Button x:Name="edit_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="160,0,0,0">
+            <Button x:Name="edit_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="160,0,0,0" Click="edit_btn_Click">
                 <Image Source="/Resources/edit.png" Width="32" Height="32"/>
             </Button>
 
@@ -24,15 +28,19 @@
             </Button>
 
         </Grid>
-        <Grid Width="400" VerticalAlignment="Top" Margin="0,90,0,15">
+        <Grid Width="400" VerticalAlignment="Top" Margin="50,90,50,0" Grid.ColumnSpan="2">
             <Grid Width="220" HorizontalAlignment="Left" Margin="0,0,0,0">
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#969696" Content="Фамилия" Height="25"/>
-                    <TextBox IsReadOnly="True" x:Name="tb_surname" FontSize="14" FontWeight="Medium" Foreground="#000000" Text="Захаров" HorizontalAlignment="Right" Margin="102,0,0,0" Width="120"/>
+                    <TextBox IsReadOnly="True" x:Name="tb_surname" FontSize="14" FontWeight="Medium" Foreground="#000000"  Text="Захаров" HorizontalAlignment="Right" Margin="102,0,0,0" Width="120"/>
                 </Grid>
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,30,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#969696" Content="Имя" Height="25"/>
-                    <TextBox IsReadOnly="True" x:Name="tb_name" FontSize="14" FontWeight="Medium" Foreground="#000000" Text="Владислав" HorizontalAlignment="Right" Margin="101,0,0,0" Width="120"/>
+                    <TextBox IsReadOnly="True" x:Name="tb_name" FontSize="14" FontWeight="Medium" Foreground="#000000" Text="Владислав" HorizontalAlignment="Left" Margin="100,0,0,0" Width="120" Grid.ColumnSpan="2"/>
                 </Grid>
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,60,0,0">
                     <Grid.ColumnDefinitions>
