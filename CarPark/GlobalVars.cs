@@ -18,35 +18,48 @@ namespace CarPark
                + ";port=" + GlobalVars.Port + ";User Id=" + GlobalVars.Username + ";password=" + GlobalVars.Password;
 
         static string login;
+        static int id_log;
         static int id_driver;
         static int id_t;
         static int id_mark;
         static int id_typeT;
 
-        public static string Login
+        static bool firstLog = true;
+
+        public static bool FirstLog
+        {
+            get { return firstLog; }
+            set { firstLog = value; }
+        }
+        public static string? Login
         {
             get { return login; }
             set { login = value; }
         }
-        public static int ID_driver
+        public static int? IDlog
+        {
+            get { return id_log; }
+            set { id_log = (int)value; }
+        }
+        public static int? ID_driver
         {
             get { return id_driver; }
-            set { id_driver = value; }
+            set { id_driver = (int)value; }
         }
-        public static int IDt
+        public static int? IDt
         {
             get { return id_t; }
-            set { id_t = value; }
+            set { id_t = (int)value; }
         }
-        public static int IDmark
+        public static int? IDmark
         {
             get { return id_mark; }
-            set { id_mark = value; }
+            set { id_mark = (int)value; }
         }
-        public static int IDtypeT
+        public static int? IDtypeT
         {
             get { return id_typeT; }
-            set { id_typeT = value; }
+            set { id_typeT = (int)value; }
         }
         public static string Host
         {
@@ -72,40 +85,5 @@ namespace CarPark
         {
             get { return connString; }
         }
-        /*public static string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
-        public static string Surname
-        {
-            get { return surname; }
-            set { surname = value; }
-        }
-        public static string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-        public static string Patronymic
-        {
-            get { return patronymic; }
-            set { patronymic = value; }
-        }
-        public static string GosNum
-        {
-            get { return gosNum; }
-            set { gosNum = value; }
-        }
-        public static string Mark
-        {
-            get { return mark; }
-            set { mark = value; }
-        }
-        public static string ProfileImage
-        {
-            get { return profileImage; }
-            set { profileImage = value; }
-        }*/
     }
 }
