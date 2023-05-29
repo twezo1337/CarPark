@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace CarPark
 {
@@ -19,86 +21,88 @@ namespace CarPark
     /// Логика взаимодействия для MainPage.xaml
     /// </summary>
     /// 
-
-    class MyTable
-    {
-        public MyTable(string gosNumber, string mark, string kindOfTransport, string date, string routeName, string length, string routeDate, string pasCount)
-        {
-            this.gosNumber = gosNumber;
-            this.mark = mark;
-            this.kindOfTransport = kindOfTransport;
-            this.date = date;
-            this.routeName = routeName;
-            this.length = length;
-            this.routeDate = routeDate;
-            this.pasCount = pasCount;
-        }
-        public string gosNumber { get; set; }
-        public string mark { get; set; }
-        public string kindOfTransport { get; set; }
-        public string date { get; set; }
-        public string routeName { get; set; }
-        public string length { get; set; }
-        public string routeDate { get; set; }
-        public string pasCount { get; set; }
-    }
     public partial class MainPage : Window
     {
         public MainPage()
         {
             InitializeComponent();
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            log_label.Content = GlobalVars.Login;
+            using (MySqlConnection conn = new(GlobalVars.ConnString))
+            {
+                string query = "SELECT typeT FROM type_transport";
+                MySqlCommand command = new(query, conn);
 
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tbLoginReg.Items.Add(reader.GetString("typeT"));
+                }
+                reader.Close();
+            }
+        }
         private void tbLoginReg_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
         private void mainDataTable_Loaded(object sender, RoutedEventArgs e)
         {
-            List<MyTable> result = new(14)
+            using (MySqlConnection conn = new(GlobalVars.ConnString))
             {
-                new MyTable("с068хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "12"),
-                new MyTable("с069хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "14"),
-                new MyTable("с067хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "11"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с068хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "12"),
-                new MyTable("с069хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "14"),
-                new MyTable("с067хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "11"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13"),
-                new MyTable("с065хм", "Газ", "Микроавтобус", "8.03.2023", "Красноярск-Канск", "300", "15.03.2023", "13")
-            };
-            mainDataTable.ItemsSource = result;
-        }
+                string query = "SELECT * FROM transportation_info_view";
+                MySqlCommand command = new(query, conn);
 
+                conn.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                mainDataTable.ItemsSource = dataTable.DefaultView;
+            }
+        }
         private void mainDataTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
-
         private void users_table_btn_Click(object sender, RoutedEventArgs e)
         {
             Users users = new();
             users.Show();
         }
-
         private void lk_btn_Click(object sender, RoutedEventArgs e)
         {
             lk LK = new();
             LK.Show();
+            this.Close();
         }
-
         private void view_route_btn_Click(object sender, RoutedEventArgs e)
         {
             RouteInfoPage routeInfo = new RouteInfoPage();
             routeInfo.Show();
+        }
+        private void refresh_btn_Click(object sender, RoutedEventArgs e)
+        {
+            using (MySqlConnection conn = new(GlobalVars.ConnString))
+            {
+                string query = "SELECT * FROM transportation_info_view";
+                MySqlCommand command = new(query, conn);
+
+                conn.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                mainDataTable.ItemsSource = dataTable.DefaultView;
+            }
+        }
+        private void exit_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
