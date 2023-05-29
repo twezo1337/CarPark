@@ -15,6 +15,9 @@ using System.Collections;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.ComponentModel.Design;
+using Fernet;
+using System.Diagnostics;
+using System.IO;
 
 namespace CarPark
 {
@@ -106,8 +109,34 @@ namespace CarPark
                 mainDataTable.ItemsSource = dataTable.DefaultView;
             }
         }
+        private void AccountLoginNotification(string login)
+        {
+            // Получение времени подключения
+            DateTime loginTime = Process.GetCurrentProcess().StartTime;
+
+            // Получение информации о системе
+            OperatingSystem os = Environment.OSVersion;
+            Version version = Environment.Version;
+
+            string log = "Exit App: " + login + " exited app in at" + loginTime.ToString() + " from " + os.ToString() + " " + version.ToString();
+
+            StreamReader sr = new StreamReader("logKey.key");
+            string strKey = sr.ReadToEnd();
+            var byteKey = strKey.UrlSafe64Decode();
+            sr.Close();
+
+            var src64 = log.ToBase64String();
+            var token = SimpleFernet.Encrypt(byteKey, src64.UrlSafe64Decode());
+
+            File.AppendAllText("LogFile.log", token + "\n");
+
+            GlobalVars.Login = login; // Добавление логина в глобальную переменную
+
+        }
+
         private void exit_btn_Click(object sender, RoutedEventArgs e)
         {
+            AccountLoginNotification(GlobalVars.Login);
             this.Close();
         }
 
