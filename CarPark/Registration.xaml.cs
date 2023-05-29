@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.IO;
+using Fernet;
 
 namespace CarPark
 {
@@ -36,13 +37,17 @@ namespace CarPark
             OperatingSystem os = Environment.OSVersion;
             Version version = Environment.Version;
 
+            string log = "Account: " + login + " was registered in at " + loginTime.ToString() + " from " + os.ToString() + " " + version.ToString();
 
-            // Запись информации в файл
-            string filePath = "login_info.txt";
-            using (StreamWriter writer = new StreamWriter(filePath, true, Encoding.UTF8))
-            {
-                writer.WriteLine("Account: " + login + " was registered in at " + loginTime.ToString() + " from " + os.ToString() + " " + version.ToString());
-            }
+            StreamReader sr = new StreamReader("logKey.key");
+            string strKey = sr.ReadToEnd();
+            var byteKey = strKey.UrlSafe64Decode();
+            sr.Close();
+
+            var src64 = log.ToBase64String();
+            var token = SimpleFernet.Encrypt(byteKey, src64.UrlSafe64Decode());
+
+            File.AppendAllText("LogFile.log", token + "\n");
 
             GlobalVars.Login = login; // Добавление логина в глобальную переменную
 
