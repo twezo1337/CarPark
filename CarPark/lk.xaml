@@ -7,10 +7,6 @@
         mc:Ignorable="d"
         Title="lk" Height="330" Width="500" ResizeMode="NoResize" FontFamily="Inter" Loaded="Window_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="52*"/>
-            <ColumnDefinition Width="73*"/>
-        </Grid.ColumnDefinitions>
         <Grid Width="400" VerticalAlignment="Top" Margin="50,18,50,0" Grid.ColumnSpan="2">
             <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand" Click="back_btn_Click">
                 <Image Source="/Resources/back.png" Width="32" Height="30" Stretch="Fill"/>
@@ -22,7 +18,7 @@
                 <Image Source="/Resources/edit.png" Width="32" Height="32"/>
             </Button>
 
-            <Label Margin="270,10,0,0" Content="UserName" FontSize="14px" FontFamily="Inter" FontWeight="Regular"></Label>
+            <Label x:Name="log_label" Margin="270,10,0,0" FontSize="14px" FontFamily="Inter" FontWeight="Regular"></Label>
             <Button x:Name="lk_btn" HorizontalAlignment="Right" Width="65" Height="43" Background="Transparent" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="0,0,0,0">
                 <Image Source="/Resources/user.png" Width="32" Height="32"/>
             </Button>
@@ -32,7 +28,7 @@
             <Grid Width="220" HorizontalAlignment="Left" Margin="0,0,0,0">
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#969696" Content="Фамилия" Height="25"/>
-                    <TextBox IsReadOnly="True" x:Name="tb_surname" FontSize="14" FontWeight="Medium" Foreground="#000000"  Text="Захаров" HorizontalAlignment="Right" Margin="102,0,0,0" Width="120"/>
+                    <TextBox IsReadOnly="True" x:Name="tb_surname" FontSize="14" FontWeight="Medium" Foreground="#000000" HorizontalAlignment="Right" Margin="102,0,0,0" Width="120"/>
                 </Grid>
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,30,0,0">
                     <Grid.ColumnDefinitions>
@@ -40,7 +36,7 @@
                         <ColumnDefinition Width="7*"/>
                     </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#969696" Content="Имя" Height="25"/>
-                    <TextBox IsReadOnly="True" x:Name="tb_name" FontSize="14" FontWeight="Medium" Foreground="#000000" Text="Владислав" HorizontalAlignment="Left" Margin="100,0,0,0" Width="120" Grid.ColumnSpan="2"/>
+                    <TextBox IsReadOnly="True" x:Name="tb_name" FontSize="14" FontWeight="Medium" Foreground="#000000" HorizontalAlignment="Left" Margin="100,0,0,0" Width="120" Grid.ColumnSpan="2"/>
                 </Grid>
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,60,0,0">
                     <Grid.ColumnDefinitions>
@@ -48,11 +44,11 @@
                         <ColumnDefinition Width="41*"/>
                     </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#969696" Content="Отчество" Height="25"/>
-                    <TextBox IsReadOnly="True" x:Name="tb_lastname" FontSize="14" FontWeight="Medium" Foreground="#000000" Text="Владимирович" HorizontalAlignment="Right" Margin="102,0,0,0" Width="120" Grid.ColumnSpan="2"/>
+                    <TextBox IsReadOnly="True" x:Name="tb_lastname" FontSize="14" FontWeight="Medium" Foreground="#000000" HorizontalAlignment="Right" Margin="102,0,0,0" Width="120" Grid.ColumnSpan="2"/>
                 </Grid>
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,90,0,0">
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#969696" Content="Гос. номер" Height="25"/>
-                    <TextBox IsReadOnly="True" x:Name="tb_gosNumber" FontSize="14" FontWeight="Medium" Foreground="#000000" Text="с067хм" HorizontalAlignment="Right" Margin="101,0,0,0" Width="120"/>
+                    <TextBox IsReadOnly="True" x:Name="tb_gosNumber" FontSize="14" FontWeight="Medium" Foreground="#000000" HorizontalAlignment="Right" Margin="101,0,0,0" Width="120"/>
                 </Grid>
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,120,0,0">
                     <Grid.ColumnDefinitions>
@@ -60,16 +56,16 @@
                         <ColumnDefinition Width="93*"/>
                     </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#969696" Content="Марка авто" Height="25"/>
-                    <TextBox IsReadOnly="True" x:Name="tb_mark" FontSize="14" FontWeight="Medium" Foreground="#000000" Text="ГАЗ" HorizontalAlignment="Right" Margin="102,0,0,0" Width="120" Grid.ColumnSpan="2"/>
+                    <TextBox IsReadOnly="True" x:Name="tb_mark" FontSize="14" FontWeight="Medium" Foreground="#000000" HorizontalAlignment="Left" Margin="100,0,0,0" Width="120" Grid.ColumnSpan="2"/>
                 </Grid>
                 <Grid Width="220" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,150,0,0">
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#969696" Content="Тип авто" Height="25"/>
-                    <ComboBox x:Name="tb_kindTransport" FontSize="14" FontWeight="Medium" IsEditable="true" Text="Микроавтобус" Foreground="#000000" HorizontalAlignment="Right" Margin="0,0,0,0" Width="120"/>
+                    <TextBox IsReadOnly="True" x:Name="tb_kindTransport" FontSize="14" FontWeight="Medium" Foreground="#000000" HorizontalAlignment="Right" Margin="101,0,0,0" Width="120"/>
                 </Grid>
             </Grid>
             <Grid Width="180" HorizontalAlignment="Right" Margin="0,0,0,0">
-                <Image x:Name="profile_img" Source="/Resources/profile1.png" VerticalAlignment="Top" Height="130" Stretch="Fill" Margin="25,0,25,0"/>
-                <Button VerticalAlignment="Bottom" Height="25" Width="130" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E" FontSize="12">Загрузить фото</Button>
+                <Image x:Name="profile_img"  VerticalAlignment="Top" Height="130" Stretch="Fill" Margin="25,0,25,0"/>
+                <Button x:Name="uploadImg_btn" IsEnabled="False" VerticalAlignment="Bottom" Height="25" Width="130" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E" FontSize="12" Click="uploadImg_btn_Click">Загрузить фото</Button>
             </Grid>
         </Grid>
     </Grid>
