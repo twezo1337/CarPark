@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Security.Cryptography;
+using System.Diagnostics;
+using System.IO;
 
 namespace CarPark
 {
@@ -24,6 +26,26 @@ namespace CarPark
         public Registration()
         {
             InitializeComponent();
+        }
+        private void AccountLoginNotification(string login)
+        {
+            // Получение времени подключения
+            DateTime loginTime = Process.GetCurrentProcess().StartTime;
+
+            // Получение информации о системе
+            OperatingSystem os = Environment.OSVersion;
+            Version version = Environment.Version;
+
+
+            // Запись информации в файл
+            string filePath = "login_info.txt";
+            using (StreamWriter writer = new StreamWriter(filePath, true, Encoding.UTF8))
+            {
+                writer.WriteLine("Account: " + login + " was registered in at " + loginTime.ToString() + " from " + os.ToString() + " " + version.ToString());
+            }
+
+            GlobalVars.Login = login; // Добавление логина в глобальную переменную
+
         }
         public bool IsLoginExists(string login)
         {
@@ -120,6 +142,7 @@ namespace CarPark
 
                         GlobalVars.Login = tbLoginReg.Text; // Добавление логина в глобальную переменную
                         GetSetIDdriver(GlobalVars.Login);
+                        AccountLoginNotification(GlobalVars.Login);
 
                         lk personalCab = new();
                         personalCab.Show();
