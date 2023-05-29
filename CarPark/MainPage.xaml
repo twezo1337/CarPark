@@ -14,27 +14,24 @@
                 <Button x:Name="exit_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand" Click="exit_btn_Click">
                     <Image Source="/Resources/exiit.png" Width="32" Height="30" Stretch="Fill"/>
                 </Button>
-                <Button x:Name="view_route_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="170,0,0,0" Click="view_route_btn_Click">
+                <Button x:Name="view_route_btn" IsEnabled="false" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="170,0,0,0" Click="view_route_btn_Click">
                     <Image Source="/Resources/view.png" Width="32" Height="32"/>
                 </Button>
-                <Button x:Name="delete_route_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="250,0,0,0">
+                <Button x:Name="delete_route_btn" IsEnabled="false" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="250,0,0,0">
                     <Image Source="/Resources/delete.png" Width="32" Height="32"/>
                 </Button>
-                <Button x:Name="add_new_route_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="330,0,0,0">
+                <Button x:Name="add_new_route_btn" IsEnabled="false" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="330,0,0,0" Click="add_new_route_btn_Click">
                     <Image Source="/Resources/add.png" Width="32" Height="32"/>
                 </Button>
                 <Button x:Name="refresh_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="410,0,0,0" Click="refresh_btn_Click">
                     <Image Source="/Resources/reload.png" Width="32" Height="32"/>
                 </Button>
-                <Button x:Name="users_table_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="490,0,0,0" Click="users_table_btn_Click">
+                <Button x:Name="users_table_btn" IsEnabled="False"  HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="490,0,0,0" Click="users_table_btn_Click">
                     <Image Source="/Resources/users.png" Width="32" Height="32"/>
                 </Button>
-                <Button x:Name="admin_logs" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="570,0,0,0" Click="admin_logs_Click">
+                <Button x:Name="admin_logs" IsEnabled="False" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="570,0,0,0" Click="admin_logs_Click">
                     <Image Source="/Resources/help.png" Width="32" Height="32"/>
                 </Button>
-                <Border Margin="540,0,0,0" Width="225" Height="43" BorderBrush="#2F3D1E" BorderThickness="1" CornerRadius="10">
-                    <ComboBox x:Name="tbLoginReg" Text="" BorderThickness="0,0,0,0" Foreground="#6A6A6A" FontSize="14" FontWeight="Light" Padding="14,0,0,0" Margin="0,0,9,0" Height="43"/>
-                </Border>
                 <Label x:Name="log_label" Margin="970,10,0,0" FontSize="14px" FontFamily="Inter" FontWeight="Regular"></Label>
                 <Button x:Name="lk_btn" HorizontalAlignment="Right" Width="65" Height="43" Background="Transparent" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="1032,0,0,0" Click="lk_btn_Click">
                     <Image Source="/Resources/user.png" Width="32" Height="32"/>
@@ -42,7 +39,7 @@
 
             </Grid>
             <Grid Width="1100" VerticalAlignment="Top" Margin="0,90,0,15">
-                <DataGrid BorderBrush="#2F3D1E" Name="mainDataTable" Loaded="mainDataTable_Loaded" SelectionChanged="mainDataTable_SelectionChanged" FontSize="13" Foreground="#FF6A6A6A" IsReadOnly="True" Cursor="Hand" BorderThickness="1,1,1,1" >
+                <DataGrid BorderBrush="#2F3D1E" Name="mainDataTable" Loaded="mainDataTable_Loaded" SelectionChanged="mainDataTable_SelectionChanged" FontSize="13" Foreground="#FF6A6A6A" IsReadOnly="True" Cursor="Hand" BorderThickness="1,1,1,1" Margin="-225,0,-225,0" >
                     
                 </DataGrid>
 

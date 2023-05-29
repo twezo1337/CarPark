@@ -32,27 +32,14 @@ namespace CarPark
         {
             log_label.Content = GlobalVars.Login;
 
-            /*using (MySqlConnection conn = new(GlobalVars.ConnString))
+            if (GlobalVars.IDlog == 1)
             {
-                string query = "SELECT IDlog FROM log_in WHERE login = @login";
-                MySqlCommand command = new(query, conn);
-
-                command.Parameters.AddWithValue("@login", GlobalVars.Login);
-
-                conn.Open();
-                MySqlDataReader reader_4 = command.ExecuteReader();
-
-                while (reader_4.Read())
-                {
-                     = reader_4.GetString(0);
-                }
-                reader_4.Close();
-
-            }*/
-        }
-        private void tbLoginReg_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+                view_route_btn.IsEnabled = true;
+                delete_route_btn.IsEnabled = true;
+                add_new_route_btn.IsEnabled = true;
+                users_table_btn.IsEnabled = true;
+                admin_logs.IsEnabled = true;
+            }
         }
         private void mainDataTable_Loaded(object sender, RoutedEventArgs e)
         {
@@ -72,12 +59,14 @@ namespace CarPark
         }
         private void mainDataTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            /*var ind = mainDataTable.CurrentCell;
+            MessageBox.Show(ind.Column.GetValue);*/
         }
         private void users_table_btn_Click(object sender, RoutedEventArgs e)
         {
             Users users = new();
             users.Show();
+            this.Close();
         }
         private void lk_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -87,8 +76,7 @@ namespace CarPark
         }
         private void view_route_btn_Click(object sender, RoutedEventArgs e)
         {
-            RouteInfoPage routeInfo = new RouteInfoPage();
-            routeInfo.Show();
+            
         }
         private void refresh_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -115,6 +103,14 @@ namespace CarPark
         {
             AdminLogsWindow logWindow = new AdminLogsWindow();
             logWindow.Show();
+            this.Close();
+        }
+
+        private void add_new_route_btn_Click(object sender, RoutedEventArgs e)
+        {
+            RouteInfoPage routeInfo = new RouteInfoPage();
+            routeInfo.Show();
+            this.Close();
         }
     }
 }
