@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarPark"
         mc:Ignorable="d"
-        Title="RouteInfoPage" Height="485" Width="750" ResizeMode="NoResize" FontFamily="Inter">
+        Title="RouteInfoPage" Height="485" Width="750" ResizeMode="NoResize" FontFamily="Inter" Loaded="Window_Loaded">
     <Grid>
         <Grid Width="650" VerticalAlignment="Top" Margin="0,18,0,0">
-            <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand">
+            <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand" Click="back_btn_Click">
                 <Image Source="/Resources/back.png" Width="32" Height="30" Stretch="Fill"/>
             </Button>
-            <Button x:Name="edit_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="80,0,0,0">
+            <Button x:Name="edit_btn" IsEnabled="False" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="80,0,0,0">
                 <Image Source="/Resources/edit.png" Width="32" Height="32"/>
             </Button>
 
-            <Label Margin="500,10,0,0" Content="UserName" FontSize="14px" FontFamily="Inter" FontWeight="Regular"></Label>
+            <Label x:Name="log_label" Margin="500,10,0,0" FontSize="14px" FontFamily="Inter" FontWeight="Regular"></Label>
             <Button x:Name="lk_btn" HorizontalAlignment="Right" Width="65" Height="43" Background="Transparent" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="0,0,0,0">
                 <Image Source="/Resources/user.png" Width="32" Height="32"/>
             </Button>
@@ -32,16 +32,16 @@
                     <TabItem.Content>
                         <StackPanel Margin="0,20,0,0">
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
-                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Имя" Height="25"/>
-                                <TextBox IsReadOnly="True" x:Name="tb_driverName" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="Владислав" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                                <Label IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Имя" Height="25"/>
+                                <TextBox IsEnabled="False" IsReadOnly="True" x:Name="tb_driverName" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
-                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Фамилия" Height="25"/>
-                                <TextBox x:Name="tb_driverSurname" FontSize="16" FontWeight="Medium" Text="Захаров" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                                <Label IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Фамилия" Height="25"/>
+                                <TextBox IsEnabled="False" x:Name="tb_driverSurname" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
-                                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Отчество" Height="25"/>
-                                <TextBox x:Name="tb_driverLastName" FontSize="16" FontWeight="Medium" Text="Владимирович" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                                <Label IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Отчество" Height="25"/>
+                                <TextBox IsEnabled="False" x:Name="tb_driverLastName" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
                             </Grid>
                             <Button Width="150" Height="50" HorizontalAlignment="Right" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E">Сохранить</Button>
                         </StackPanel>
@@ -57,17 +57,17 @@
                         <StackPanel Margin="0,20,0,0">
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Гос. номер" Height="25"/>
-                                <TextBox IsReadOnly="True" x:Name="tb_gosNumber" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="с067хм" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                                <TextBox IsReadOnly="False" x:Name="tb_gosNumber" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Марка" Height="25"/>
-                                <ComboBox x:Name="cmb_mark" FontSize="16" FontWeight="Medium" IsEditable="true" Text="" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                                <TextBox IsReadOnly="False" x:Name="tb_mark" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Тип транспорта" Height="25"/>
-                                <ComboBox x:Name="cmb_kindTransport" FontSize="16" FontWeight="Medium" IsEditable="true" Text="" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                                <TextBox IsReadOnly="False" x:Name="tb_kindTransport" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
-                            <Button Width="150" Height="50" HorizontalAlignment="Right" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E">Сохранить</Button>
+                            <Button Width="150" Height="50" HorizontalAlignment="Right" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E" Click="Button_Click">Сохранить</Button>
                         </StackPanel>
                     </TabItem.Content>
                 </TabItem>
@@ -81,27 +81,27 @@
                         <StackPanel Margin="0,20,0,0">
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Название маршрута" Height="25"/>
-                                <TextBox IsReadOnly="True" x:Name="tb_routeName" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="Красноярск-Канск" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                                <TextBox IsReadOnly="False" x:Name="tb_routeName" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Длина маршрута" Height="25"/>
-                                <TextBox IsReadOnly="True" x:Name="tb_routeLength" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="300" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                                <TextBox IsReadOnly="False" x:Name="tb_routeLength" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Дата распределения" Height="25"/>
-                                <DatePicker x:Name="tb_rasprDate" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="300" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                                <DatePicker x:Name="tb_rasprDate" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Водитель" Height="25"/>
-                                <ComboBox x:Name="tb_kindTransport" FontSize="16" FontWeight="Medium" IsEditable="true" Text="" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
+                                <ComboBox x:Name="tb_driver" FontSize="16" FontWeight="Medium" IsEditable="true" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="0,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Дата маршрута" Height="25"/>
-                                <DatePicker x:Name="tb_routeDate" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="300" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                                <DatePicker x:Name="tb_routeDate" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
                             <Grid Width="450" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0">
                                 <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#000000" Content="Кол-во пассажиров" Height="25"/>
-                                <TextBox IsReadOnly="True" x:Name="tb_pasCount" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" Text="12" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
+                                <TextBox IsReadOnly="False" x:Name="tb_pasCount" FontSize="16" FontWeight="Medium" Foreground="#2F3D1E" HorizontalAlignment="Right" Margin="102,0,0,0" Width="150"/>
                             </Grid>
                             <Button Width="150" Height="50" HorizontalAlignment="Right" Foreground="White" Background="#2F3D1E" BorderBrush="#FF2F3D1E">Сохранить</Button>
                         </StackPanel>
