@@ -21,26 +21,18 @@ namespace CarPark
     /// </summary>
     public partial class Registration : Window
     {
-        string host = "localhost";
-        string database = "zi";
-        string port = "3306";
-        string username = "root";
-        string password = "qwerty";
-
         public Registration()
         {
             InitializeComponent();
         }
         public bool IsLoginExists(string login)
         {
-            String connString = "Server=" + host + ";Database=" + database
-               + ";port=" + port + ";User Id=" + username + ";password=" + password;
 
             bool result = true;
 
             string query = "SELECT COUNT(*) FROM log_in WHERE login = @login";
 
-            using (MySqlConnection conn = new(connString))
+            using (MySqlConnection conn = new(GlobalVars.ConnString))
             {
                 MySqlCommand command = new(query, conn);
                 command.Parameters.AddWithValue("@login", login);
@@ -69,19 +61,29 @@ namespace CarPark
         }
         public void InsertInDB(string login, string psswrd)
         {
-
-            String connString = "Server=" + host + ";Database=" + database
-               + ";port=" + port + ";User Id=" + username + ";password=" + password;
-
             string query = "INSERT INTO log_in (login, password) VALUES (@login, @password)";
 
-            using (MySqlConnection conn = new(connString))
+            using (MySqlConnection conn = new(GlobalVars.ConnString))
             {
                 MySqlCommand command = new(query, conn);
                 command.Parameters.AddWithValue("@login", login);
                 command.Parameters.AddWithValue("@password", psswrd);
                 conn.Open();
                 int rowsAffected = command.ExecuteNonQuery();
+            }
+        }
+        private void GetSetIDdriver(string login)
+        {
+            string query = "SELECT IDdriver FROM log_in WHERE login = @login";
+
+            using (MySqlConnection conn = new(GlobalVars.ConnString))
+            {
+                MySqlCommand command = new(query, conn);
+
+                command.Parameters.AddWithValue("@login", login);
+                conn.Open();
+
+                GlobalVars.ID_driver = (int)command.ExecuteScalar(); // Добавление IDdriver в глобальную переменную
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -116,6 +118,9 @@ namespace CarPark
                     {
                         InsertInDB(tbLoginReg.Text, Hashfunc(tbPasswordReg.Password));
 
+                        GlobalVars.Login = tbLoginReg.Text; // Добавление логина в глобальную переменную
+                        GetSetIDdriver(GlobalVars.Login);
+
                         lk personalCab = new();
                         personalCab.Show();
                         this.Close();
@@ -145,7 +150,6 @@ namespace CarPark
                 tbRepeatPasswordReg.BorderBrush = Brushes.Green;
             }
         }
-
         private void tbLoginReg_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;

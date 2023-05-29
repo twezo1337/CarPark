@@ -28,17 +28,11 @@ namespace CarPark
     /// </summary>
     public partial class MainWindow : Window
     {
-        string host = "localhost";
-        string database = "zi";
-        string port = "3306";
-        string username = "root";
-        string password = "qwerty";
-       
         public MainWindow()
         {
             InitializeComponent();
         }
-        public void AccountLoginNotification(string login)
+        private void AccountLoginNotification(string login)
         {
             // Получение времени подключения
             DateTime loginTime = Process.GetCurrentProcess().StartTime;
@@ -55,6 +49,8 @@ namespace CarPark
                 writer.WriteLine("Account login: " + login + " was logged in at " + loginTime.ToString() + " from " + os.ToString() + " " + version.ToString());
             }
 
+            GlobalVars.Login = login; // Добавление логина в глобальную переменную
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -62,7 +58,7 @@ namespace CarPark
             registration.Show();
             this.Close();
         }
-        public string Hashfunc(string hashpassword)
+        private string Hashfunc(string hashpassword)
         {
             byte[] passwordBytes = Encoding.UTF8.GetBytes(hashpassword);
             byte[] hashBytes;
@@ -76,14 +72,23 @@ namespace CarPark
 
             return hashedPassword;
         }
+        /*private void SetGlobalVars(string login, string password, string surname, string name, string patronymic, string gosNum, string mark, string typeT, string profileImage)
+        {
+            GlobalVars.Login = login;
+            GlobalVars.Password = password;
+            GlobalVars.Surname = surname;
+            GlobalVars.Name = name;
+            GlobalVars.Patronymic = patronymic;
+            GlobalVars.GosNum = gosNum;
+            GlobalVars.Mark = mark;
+            GlobalVars.TypeT = typeT;
+            GlobalVars.ProfileImage = profileImage;
+        }*/
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            String connString = "Server=" + host + ";Database=" + database
-              + ";port=" + port + ";User Id=" + username + ";password=" + password;
+            string query = "SELECT login, password, IDlog, IDdriver FROM log_in WHERE login = @login AND password = @password";
 
-            string query = "SELECT login, password, IDlog FROM log_in WHERE login = @login AND password = @password";
-
-            using (MySqlConnection conn = new(connString))
+            using (MySqlConnection conn = new(GlobalVars.ConnString))
             {
                 bool invalid_log = true;
                 MySqlCommand command = new(query, conn);
@@ -100,6 +105,7 @@ namespace CarPark
                         string log = reader.GetString(0);
                         string pass = reader.GetString(1);
                         int idlog = reader.GetInt32(2);
+                        GlobalVars.ID_driver = reader.GetInt32(3);
                         MainPage main = new MainPage();
                         switch (idlog)
                         {
@@ -134,7 +140,6 @@ namespace CarPark
                 }
             }
         }
-
         private void tbLogin_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
