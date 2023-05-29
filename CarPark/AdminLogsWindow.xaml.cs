@@ -32,7 +32,9 @@ namespace CarPark
 
         private void back_btn_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            MainPage mainPage = new MainPage();
+            mainPage.Show();
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -98,10 +98,10 @@ namespace CarPark
                     {
                         string log = reader.GetString(0);
                         string pass = reader.GetString(1);
-                        int idlog = reader.GetInt32(2);
+                        GlobalVars.IDlog = reader.GetInt32(2);
                         GlobalVars.ID_driver = reader.GetInt32(3);
                         MainPage main = new MainPage();
-                        switch (idlog)
+                        switch (GlobalVars.IDlog)
                         {
                             case 0:
                                 invalid_log = false;

@@ -18,6 +18,8 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using Fernet;
 using System.Diagnostics;
+using System.ComponentModel.Design;
+using System.Text.RegularExpressions;
 
 namespace CarPark
 {
@@ -32,7 +34,11 @@ namespace CarPark
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SetInfo();
+            if (GlobalVars.FirstLog)
+            {
+                SetInfo();
+            }
+            GlobalVars.FirstLog = true;
         }
         /// <summary>
         /// Ввнесение всех данных о пользователе в личном кабинете
@@ -50,34 +56,35 @@ namespace CarPark
                 command_1.Parameters.AddWithValue("@IDdriver", GlobalVars.ID_driver);
 
                 conn.Open();
-                MySqlDataReader reader_1 = command_1.ExecuteReader();
 
-                while (reader_1.Read())
+                using (MySqlDataReader reader_1 = command_1.ExecuteReader())
                 {
-                    try
+                    while (reader_1.Read())
                     {
-                        tb_surname.Text = reader_1.GetString(0);
-                        tb_name.Text = reader_1.GetString(1);
-                        tb_lastname.Text = reader_1.GetString(2);
-                        GlobalVars.IDt = reader_1.GetInt32(4);
-                        byte[] longBlobData = (byte[])reader_1["profileImage"];
-                        using (var ms = new MemoryStream(longBlobData))
+                        try
                         {
-                            BitmapImage bitmapImage = new BitmapImage();
-                            bitmapImage.BeginInit();
-                            bitmapImage.StreamSource = ms;
-                            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                            bitmapImage.EndInit();
+                            tb_surname.Text = reader_1.GetString(0);
+                            tb_name.Text = reader_1.GetString(1);
+                            tb_lastname.Text = reader_1.GetString(2);
+                            GlobalVars.IDt = reader_1.GetInt32(4);
+                            byte[] longBlobData = (byte[])reader_1["profileImage"];
+                            using (var ms = new MemoryStream(longBlobData))
+                            {
+                                BitmapImage bitmapImage = new BitmapImage();
+                                bitmapImage.BeginInit();
+                                bitmapImage.StreamSource = ms;
+                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                                bitmapImage.EndInit();
 
-                            profile_img.Source = bitmapImage;
+                                profile_img.Source = bitmapImage;
+                            }
+                        }
+                        catch (Exception Ex)
+                        {
+                            MessageBox.Show("Ошибка " + Ex.Message.ToString() + "Критическая работа приложения!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
-                    catch (Exception Ex)
-                    {
-                        MessageBox.Show("Ошибка " + Ex.Message.ToString() + "Критическая работа приложения!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
                 }
-                reader_1.Close();
 
                 // Заполнение Гос номера
                 string query_2 = "SELECT gosNum, IDmark, IDtypeT FROM transports WHERE IDt = @IDt";
@@ -85,74 +92,56 @@ namespace CarPark
 
                 command_2.Parameters.AddWithValue("@IDt", GlobalVars.IDt);
 
-                MySqlDataReader reader_2 = command_2.ExecuteReader();
-
-                while (reader_2.Read())
+                using (MySqlDataReader reader_2 = command_2.ExecuteReader())
                 {
-                    try
+                    while (reader_2.Read())
                     {
-                        tb_gosNumber.Text = reader_2.GetString(0);
-                        GlobalVars.IDmark = reader_2.GetInt32(1);
-                        GlobalVars.IDtypeT = reader_2.GetInt32(2);
-                    }
-                    catch (Exception Ex)
-                    {
-                        MessageBox.Show("Ошибка " + Ex.Message.ToString() + "Критическая работа приложения!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        try
+                        {
+                            tb_gosNumber.Text = reader_2.GetString(0);
+                            GlobalVars.IDmark = reader_2.GetInt32(1);
+                            GlobalVars.IDtypeT = reader_2.GetInt32(2);
+                        }
+                        catch (Exception Ex)
+                        {
+                            MessageBox.Show("Ошибка " + Ex.Message.ToString() + "Критическая работа приложения!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
                 }
-                reader_2.Close();
-
-                /*// Заполнение предметов comboBox mark
-                string query_3 = "SELECT mark FROM marks";
-                MySqlCommand command_3 = new(query_3, conn);
-
-                MySqlDataReader reader_3 = command_3.ExecuteReader();
-
-                while (reader_3.Read())
-                {
-                    tb_mark.Items.Add(reader_3.GetString("mark"));
-                }
-                reader_3.Close();*/
 
                 // Заполнение Марки машины
-                string query_4 = "SELECT mark FROM marks WHERE IDmark = @IDmark";
+                string query_4 = "SELECT IFNULL(mark, '') AS mark FROM marks WHERE IDmark = @IDmark";
                 MySqlCommand command_4 = new(query_4, conn);
 
                 command_4.Parameters.AddWithValue("@IDmark", GlobalVars.IDmark);
 
-                MySqlDataReader reader_4 = command_4.ExecuteReader();
-
-                while (reader_4.Read())
+                using (MySqlDataReader reader_4 = command_4.ExecuteReader())
                 {
-                    tb_mark.Text = reader_4.GetString(0);
+                    if (reader_4.HasRows)
+                    {
+                        while (reader_4.Read())
+                        {
+                            tb_mark.Text = reader_4.GetString(0);
+                        }
+                    }
                 }
-                reader_4.Close();
-
-                /*// Заполнение предметов comboBox type
-                string query_5 = "SELECT typeT FROM type_transport";
-                MySqlCommand command_5 = new(query_5, conn);
-
-                MySqlDataReader reader_5 = command_5.ExecuteReader();
-
-                while (reader_5.Read())
-                {
-                    tb_kindTransport.Items.Add(reader_5.GetString("typeT"));
-                }
-                reader_5.Close();*/
 
                 // Заполнение типа машины
-                string query_6 = "SELECT typeT FROM type_transport WHERE IDtypeT = @IDtypeT";
+                string query_6 = "SELECT IFNULL(typeT, '') AS typeT FROM type_transport WHERE IDtypeT = @IDtypeT";
                 MySqlCommand command_6 = new(query_6, conn);
 
                 command_6.Parameters.AddWithValue("@IDtypeT", GlobalVars.IDtypeT);
 
-                MySqlDataReader reader_6 = command_6.ExecuteReader();
-
-                while (reader_6.Read())
+                using (MySqlDataReader reader_6 = command_6.ExecuteReader())
                 {
-                    tb_kindTransport.Text = reader_6.GetString(0);
+                    if (reader_6.HasRows)
+                    {
+                        while (reader_6.Read())
+                        {
+                            tb_kindTransport.Text = reader_6.GetString(0);
+                        }
+                    }
                 }
-                reader_6.Close();
             }
         }
         /// <summary>
@@ -224,23 +213,76 @@ namespace CarPark
         /// </summary>
         private void back_btn_Click(object sender, RoutedEventArgs e)
         {
-            SaveInfo();
+            string pattern = @"^(А|В|Е|К|М|Н|О|Р|С|Т|У|Х){1}\d{3}(А|В|Е|К|М|Н|О|Р|С|Т|У|Х){2}$";
 
-            tb_surname.IsReadOnly = true;
-            tb_name.IsReadOnly = true;
-            tb_lastname.IsReadOnly = true;
-            tb_gosNumber.IsReadOnly = true;
-            tb_mark.IsReadOnly = true;
-            tb_kindTransport.IsReadOnly = true;
+            string name = @"\w[А-я]$";
 
-            uploadImg_btn.IsEnabled = false;
+            if (Regex.IsMatch(tb_surname.Text, name) && tb_surname.Text.Length != 0)
+            {
+                if (Regex.IsMatch(tb_name.Text, name) && tb_name.Text.Length != 0)
+                {
+                    if (Regex.IsMatch(tb_lastname.Text, name))
+                    {
+                        if (tb_gosNumber.Text.Length == 0)
+                        {
+                            MessageBox.Show("Введите гос.номер автомобиля!");
+                        }
+                        else
+                        {
+                            try
+                            {
+                                if (Regex.IsMatch(tb_gosNumber.Text, pattern) && tb_gosNumber.Text.Length == 6)
+                                {
+                                    MessageBox.Show("Номер автомобиля введен правильно.");
 
-            exit_btn.IsEnabled = true;
-            edit_btn.IsEnabled = true;
+                                    SaveInfo();
 
-            MainPage mainPage = new();
-            mainPage.Show();
-            this.Close();
+                                    tb_surname.IsReadOnly = true;
+                                    tb_name.IsReadOnly = true;
+                                    tb_lastname.IsReadOnly = true;
+                                    tb_gosNumber.IsReadOnly = true;
+                                    tb_mark.IsReadOnly = true;
+                                    tb_kindTransport.IsReadOnly = true;
+
+                                    uploadImg_btn.IsEnabled = false;
+
+                                    exit_btn.IsEnabled = true;
+                                    edit_btn.IsEnabled = true;
+
+                                    MainPage mainPage = new();
+                                    mainPage.Show();
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Номер автомобиля введен неправильно. Введите номер в формате X123XX. В номере может быть только 6 символов.");
+                                    tb_gosNumber.Text = null;
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Введите номер в формате X123XX!!!");
+                                tb_gosNumber.Text = null;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Отчество может содержать только русские буквы");
+                        tb_lastname.Text = null;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Имя может содержать только русские буквы");
+                    tb_name.Text = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Фамилия может содержать только русские буквы");
+                tb_surname.Text = null;
+            } 
         }
         /// <summary>
         /// Выход из данного профиля, возврат к окну авторизации

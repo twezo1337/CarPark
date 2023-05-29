@@ -148,6 +148,7 @@ namespace CarPark
                         GlobalVars.Login = tbLoginReg.Text; // Добавление логина в глобальную переменную
                         GetSetIDdriver(GlobalVars.Login);
                         AccountLoginNotification(GlobalVars.Login);
+                        GlobalVars.FirstLog = false;
 
                         lk personalCab = new();
                         personalCab.Show();
