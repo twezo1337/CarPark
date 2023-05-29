@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarPark"
         mc:Ignorable="d"
-        Title="Users" Height="338" Width="850" ResizeMode="NoResize" FontFamily="Inter">
+        Title="Users" Height="500" Width="1150" ResizeMode="NoResize" FontFamily="Inter">
     <Grid>
         <Grid Width="750" VerticalAlignment="Top" Margin="0,18,0,0">
-            <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand">
+            <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand" Click="back_btn_Click">
                 <Image Source="/Resources/back.png" Width="32" Height="30" Stretch="Fill"/>
             </Button>
             <Button x:Name="delete_user_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="80,0,0,0">
@@ -19,15 +19,7 @@
             </Button>
         </Grid>
         <Grid Width="750" VerticalAlignment="Top" Margin="0,90,0,15">
-            <DataGrid BorderBrush="#2F3D1E" Name="usersTable" ItemsSource="{Binding}" AutoGenerateColumns="False" FontSize="13" Foreground="#FF6A6A6A" IsReadOnly="True" Cursor="Hand" BorderThickness="1,1,1,1" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn FontSize="15" FontWeight="Medium" FontStyle="Normal" Foreground="#2F3D1E" Width="100" Header="Фамилия"  Binding="{Binding firstName}" FontFamily="Inter" IsReadOnly="True"/>
-                    <DataGridTextColumn FontSize="15" FontWeight="Medium" FontStyle="Normal" Foreground="#2F3D1E" Width="90" Header="Имя" Binding="{Binding surname}" FontFamily="Inter" IsReadOnly="True"/>
-                    <DataGridTextColumn FontSize="15" FontWeight="Medium" FontStyle="Normal" Foreground="#2F3D1E" Width="100" Header="Отчество" Binding="{Binding lastName}" FontFamily="Inter" IsReadOnly="True"/>
-                    <DataGridTextColumn FontSize="15" FontWeight="Medium" FontStyle="Normal" Foreground="#2F3D1E" Width="130" Header="Гос. номер авто" Binding="{Binding gosNumberTransport}" FontFamily="Inter" IsReadOnly="True"/>
-                    <DataGridTextColumn FontSize="15" FontWeight="Medium" FontStyle="Normal" Foreground="#2F3D1E" Width="120" Header="Марка авто" Binding="{Binding markTransport}" FontFamily="Inter" IsReadOnly="True"/>
-                    <DataGridTextColumn FontSize="15" FontWeight="Medium" FontStyle="Normal" Foreground="#2F3D1E" Width="100" Header="Тип авто" Binding="{Binding kindTransport}" FontFamily="Inter" IsReadOnly="True"/>
-                </DataGrid.Columns>
+            <DataGrid BorderBrush="#2F3D1E" Name="usersTable" FontSize="13" Foreground="#FF6A6A6A" IsReadOnly="True" Cursor="Hand" BorderThickness="1,1,1,1" Loaded="usersTable_Loaded" Margin="-185,0,-185,0" >
             </DataGrid>
 
         </Grid>

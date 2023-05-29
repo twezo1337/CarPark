@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,30 @@ namespace CarPark
         public Users()
         {
             InitializeComponent();
+        }
+
+        private void usersTable_Loaded(object sender, RoutedEventArgs e)
+        {
+            using (MySqlConnection conn = new(GlobalVars.ConnString))
+            {
+                string query = "SELECT * FROM driver_info_view";
+                MySqlCommand command = new(query, conn);
+
+                conn.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                usersTable.ItemsSource = dataTable.DefaultView;
+            }
+        }
+
+        private void back_btn_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage mainPage = new MainPage();
+            mainPage.Show();
+            this.Close();
         }
     }
 }
