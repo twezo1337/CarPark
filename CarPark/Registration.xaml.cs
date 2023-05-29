@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
 
 namespace CarPark
 {
@@ -30,10 +31,8 @@ namespace CarPark
         {
             InitializeComponent();
         }
-
         public bool IsLoginExists(string login)
         {
-
             String connString = "Server=" + host + ";Database=" + database
                + ";port=" + port + ";User Id=" + username + ";password=" + password;
 
@@ -54,7 +53,37 @@ namespace CarPark
             }
             return result;
         }
+        public string Hashfunc(string hashpassword)
+        {
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(hashpassword);
+            byte[] hashBytes;
 
+            using (SHA256Managed sha256 = new SHA256Managed())
+            {
+                hashBytes = sha256.ComputeHash(passwordBytes);
+            }
+
+            string hashedPassword = Convert.ToBase64String(hashBytes);
+
+            return hashedPassword;
+        }
+        public void InsertInDB(string login, string psswrd)
+        {
+
+            String connString = "Server=" + host + ";Database=" + database
+               + ";port=" + port + ";User Id=" + username + ";password=" + password;
+
+            string query = "INSERT INTO log_in (login, password) VALUES (@login, @password)";
+
+            using (MySqlConnection conn = new(connString))
+            {
+                MySqlCommand command = new(query, conn);
+                command.Parameters.AddWithValue("@login", login);
+                command.Parameters.AddWithValue("@password", psswrd);
+                conn.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+            }
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (IsLoginExists(tbLoginReg.Text))
@@ -72,31 +101,34 @@ namespace CarPark
                         if (tbPasswordReg.Password[i] == '_' || tbPasswordReg.Password[i] == '-' || tbPasswordReg.Password[i] == '!') symbol = true; // если символ
                     }
 
+                    for (int i = 0; i < tbLoginReg.Text.Length; i++) // перебираем символы
+                    {
+                        if (tbLoginReg.Text[i] >= 'А' && tbLoginReg.Text[i] <= 'Я') en = false; // если русская раскладка
+                    }
+
                     if (!en)
-                        MessageBox.Show("Доступна только английская раскладка"); // выводим сообщение
+                        MessageBox.Show("Используйте только английскую раскладку!");
                     else if (!symbol)
-                        MessageBox.Show("Добавьте один из следующих символов: _ - !"); // выводим сообщение
+                        MessageBox.Show("Добавьте один из следующих символов: _ - !");
                     else if (!number)
-                        MessageBox.Show("Добавьте хотя бы одну цифру"); // выводим сообщение
+                        MessageBox.Show("Добавьте хотя бы одну цифру.");
                     if (en && symbol && number) // проверяем соответствие
                     {
-                        // ДОБАВЛЕНИЕ В БАЗУ
+                        InsertInDB(tbLoginReg.Text, Hashfunc(tbPasswordReg.Password));
 
                         lk personalCab = new();
                         personalCab.Show();
                         this.Close();
                     }
                 }
-                else MessageBox.Show("Пароль слишком короткий, необходимо минимум 6 символов или введите логин");
+                else MessageBox.Show("Пароль слишком короткий, необходимо минимум 6 символов или введите логин.");
             }
-            else MessageBox.Show("Такой человек уже зарегистрирован");
+            else MessageBox.Show("Такой логин уже существует!");
         }
-
         private void tbPasswordReg_PasswordChanged(object sender, RoutedEventArgs e)
         {
             tbRepeatPasswordReg.Password = null;
         }
-
         private void tbRepeatPasswordReg_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (tbRepeatPasswordReg.Password != tbPasswordReg.Password)
@@ -111,6 +143,15 @@ namespace CarPark
                 regButton.IsEnabled = true;
                 tbRepeatPasswordReg.Background = Brushes.LightGreen;
                 tbRepeatPasswordReg.BorderBrush = Brushes.Green;
+            }
+        }
+
+        private void tbLoginReg_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "Логин")
+            {
+                textBox.Text = "";
             }
         }
     }
