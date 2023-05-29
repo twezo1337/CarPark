@@ -72,18 +72,6 @@ namespace CarPark
 
             return hashedPassword;
         }
-        /*private void SetGlobalVars(string login, string password, string surname, string name, string patronymic, string gosNum, string mark, string typeT, string profileImage)
-        {
-            GlobalVars.Login = login;
-            GlobalVars.Password = password;
-            GlobalVars.Surname = surname;
-            GlobalVars.Name = name;
-            GlobalVars.Patronymic = patronymic;
-            GlobalVars.GosNum = gosNum;
-            GlobalVars.Mark = mark;
-            GlobalVars.TypeT = typeT;
-            GlobalVars.ProfileImage = profileImage;
-        }*/
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             string query = "SELECT login, password, IDlog, IDdriver FROM log_in WHERE login = @login AND password = @password";

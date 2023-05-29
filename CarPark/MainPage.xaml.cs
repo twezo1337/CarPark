@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Collections;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.ComponentModel.Design;
 
 namespace CarPark
 {
@@ -30,19 +31,24 @@ namespace CarPark
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             log_label.Content = GlobalVars.Login;
-            using (MySqlConnection conn = new(GlobalVars.ConnString))
+
+            /*using (MySqlConnection conn = new(GlobalVars.ConnString))
             {
-                string query = "SELECT typeT FROM type_transport";
+                string query = "SELECT IDlog FROM log_in WHERE login = @login";
                 MySqlCommand command = new(query, conn);
 
-                MySqlDataReader reader = command.ExecuteReader();
+                command.Parameters.AddWithValue("@login", GlobalVars.Login);
 
-                while (reader.Read())
+                conn.Open();
+                MySqlDataReader reader_4 = command.ExecuteReader();
+
+                while (reader_4.Read())
                 {
-                    tbLoginReg.Items.Add(reader.GetString("typeT"));
+                     = reader_4.GetString(0);
                 }
-                reader.Close();
-            }
+                reader_4.Close();
+
+            }*/
         }
         private void tbLoginReg_TextChanged(object sender, TextChangedEventArgs e)
         {
