@@ -30,19 +30,6 @@ namespace CarPark
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             log_label.Content = GlobalVars.Login;
-            using (MySqlConnection conn = new(GlobalVars.ConnString))
-            {
-                string query = "SELECT typeT FROM type_transport";
-                MySqlCommand command = new(query, conn);
-
-                MySqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    tbLoginReg.Items.Add(reader.GetString("typeT"));
-                }
-                reader.Close();
-            }
         }
         private void tbLoginReg_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -103,6 +90,12 @@ namespace CarPark
         private void exit_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void admin_logs_Click(object sender, RoutedEventArgs e)
+        {
+            AdminLogsWindow logWindow = new AdminLogsWindow();
+            logWindow.Show();
         }
     }
 }

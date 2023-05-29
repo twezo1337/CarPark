@@ -1,0 +1,21 @@
+﻿<Window x:Class="CarPark.AdminLogsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarPark"
+        mc:Ignorable="d"
+        Title="AdminLogsWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="451*"/>
+            <ColumnDefinition Width="349*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Width="650" VerticalAlignment="Top" Margin="75,18,75,0" Grid.ColumnSpan="2">
+            <Button x:Name="back_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="-1,0,0,0" Cursor="Hand" Click="back_btn_Click">
+                <Image Source="/Resources/back.png" Width="32" Height="30" Stretch="Fill"/>
+            </Button>
+        </Grid>
+        <RichTextBox Margin="75,80,75,10" Width="650px" Name="richtb_logs" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>

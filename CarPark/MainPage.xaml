@@ -29,7 +29,7 @@
                 <Button x:Name="users_table_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="490,0,0,0" Click="users_table_btn_Click">
                     <Image Source="/Resources/users.png" Width="32" Height="32"/>
                 </Button>
-                <Button x:Name="help_btn" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="570,0,0,0">
+                <Button x:Name="admin_logs" HorizontalAlignment="Left" Width="65" Height="43" Background="#FF2F3D1E" BorderBrush="#00673AB7" BorderThickness="0,0,0,0" Margin="570,0,0,0" Click="admin_logs_Click">
                     <Image Source="/Resources/help.png" Width="32" Height="32"/>
                 </Button>
                 <Border Margin="540,0,0,0" Width="225" Height="43" BorderBrush="#2F3D1E" BorderThickness="1" CornerRadius="10">
